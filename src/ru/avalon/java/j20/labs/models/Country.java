@@ -61,6 +61,14 @@ public class Country {
         /*
          * TODO(Студент): Реализовать метод valueOf класса Country
          */
-        throw new UnsupportedOperationException("Not implemented yet!");
+        
+        if (text==null) throw new IllegalArgumentException();
+        
+        int index = text.indexOf(":");
+        if (index == -1) throw new StringIndexOutOfBoundsException("String format is unsupported");
+        String key = text.substring(0, index);
+        String valString = text.substring(index);
+        
+        return new Country(key, valString);
     }
 }

@@ -1,10 +1,18 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.io.BufferedReader;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Collection;
+import java.util.LinkedList;
+import sun.security.util.Length;
 
 /**
  * Задание №3
@@ -52,7 +60,15 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        if(file == null) throw new FileNotFoundException();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))){
+            Collection<String> list = new LinkedList<>();
+            String s;
+            while ((s = br.readLine())!=null){
+                list.add(s);
+            }
+            return list;
+        }
     }
 
     /**
@@ -66,6 +82,13 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        if (file == null) throw new FileNotFoundException();
+        if (collection == null) throw new IllegalArgumentException();
+        try(Writer writer = new PrintWriter(new FileWriter(file))){
+            for( String s : collection) {
+                writer.write(s);
+                writer.write("\\n");
+            }
+        }
     }
 }

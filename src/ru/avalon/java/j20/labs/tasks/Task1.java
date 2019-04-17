@@ -1,9 +1,16 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Задание №1
@@ -45,7 +52,7 @@ public class Task1 implements Task {
 
     /**
      * Выполняет чтение указанного файла в двоичном режиме.
-     *
+     *up
      * <p>Весь текст файла возвращается в виде одного
      * экземпляра типа {@link String}.
      *
@@ -54,7 +61,19 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        if(file == null) throw new FileNotFoundException("No file name."); 
+        try (InputStream in = new FileInputStream(file); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            
+            byte[] bufferBytes = new byte[in.available()];   //инициализируем буфер для хранения прочитанных байтов
+            
+            int symbol;
+            while((symbol = in.read())!=-1) {
+                in.read(bufferBytes, 0, in.available());
+            }
+            
+            baos.write(bufferBytes);
+            return baos.toString();
+        }
     }
 
     /**
@@ -66,6 +85,14 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        if (file == null) throw new FileNotFoundException("No file name.");
+        if (text == null) throw new IllegalArgumentException("File is empty.");
+        
+        try (OutputStream out = new FileOutputStream(file)){
+            
+        byte[] writingBytes = text.getBytes();
+        out.write(writingBytes);
+                 
+        }
     }
 }
