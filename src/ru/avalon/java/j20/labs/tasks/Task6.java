@@ -53,9 +53,9 @@ public class Task6 implements Task {
      * @throws IOException в случае ошибки ввода-вывода.
      */
     private Collection<Country> read(File file) throws IOException, ParseException {
+        if (file == null) throw new NullPointerException("Missing filename");;
         Collection<Country> listCountry = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
-            if (file == null) throw new FileNotFoundException();
             String s;
             while((s = br.readLine())!= null){
                 listCountry.add(Country.valueOf(s));

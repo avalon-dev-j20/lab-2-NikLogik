@@ -64,14 +64,11 @@ public class Task1 implements Task {
         if(file == null) throw new FileNotFoundException("No file name."); 
         try (InputStream in = new FileInputStream(file); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             
-            byte[] bufferBytes = new byte[in.available()];   //инициализируем буфер для хранения прочитанных байтов
-            
             int symbol;
             while((symbol = in.read())!=-1) {
-                in.read(bufferBytes, 0, in.available());
+                baos.write(in.read());
             }
             
-            baos.write(bufferBytes);
             return baos.toString();
         }
     }
@@ -85,8 +82,8 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        if (file == null) throw new FileNotFoundException("No file name.");
-        if (text == null) throw new IllegalArgumentException("File is empty.");
+        if (file == null) throw new NullPointerException("Argument " + file + " is null");
+        if (text == null) throw new NullPointerException("Argument " + text + " is null");
         
         try (OutputStream out = new FileOutputStream(file)){
             

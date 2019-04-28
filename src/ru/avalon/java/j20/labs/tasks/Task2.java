@@ -81,7 +81,7 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        if (file == null) throw new FileNotFoundException();
+        if (file == null) throw new NullPointerException("Missing filename");;
         if (text == null) throw new IllegalArgumentException();
         
         try (Writer writer = new FileWriter(file)){

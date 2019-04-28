@@ -60,7 +60,7 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        if(file == null) throw new FileNotFoundException();
+        if(file == null) throw new NullPointerException("Missing filename");
         try (BufferedReader br = new BufferedReader(new FileReader(file))){
             Collection<String> list = new LinkedList<>();
             String s;
@@ -82,12 +82,12 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        if (file == null) throw new FileNotFoundException();
-        if (collection == null) throw new IllegalArgumentException();
+        if (file == null) throw new NullPointerException("Missing filename");
+        if (collection == null) throw new NullPointerException("Missing collection of strings");
         try(Writer writer = new PrintWriter(new FileWriter(file))){
             for( String s : collection) {
                 writer.write(s);
-                writer.write("\\n");
+                System.lineSeparator();
             }
         }
     }
