@@ -87,7 +87,7 @@ public class Task3 implements Task {
         try(Writer writer = new PrintWriter(new FileWriter(file))){
             for( String s : collection) {
                 writer.write(s);
-                System.lineSeparator();
+                writer.write(System.lineSeparator());
             }
         }
     }

@@ -82,8 +82,8 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        if (file == null) throw new NullPointerException("Argument " + file + " is null");
-        if (text == null) throw new NullPointerException("Argument " + text + " is null");
+        if (file == null) throw new NullPointerException("Write to file is impossible. File does not exist");
+        if (text == null) throw new NullPointerException("No data to writing");
         
         try (OutputStream out = new FileOutputStream(file)){
             
